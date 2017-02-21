@@ -38,9 +38,17 @@ namespace NinjaAntLoginService
             EventLog.WriteEntry(sSource, string.Format("NALogin - Hostname: {0}", _hostName));
             topic = String.Format("/Logins/{0}",HostSplit[1]);
             EventLog.WriteEntry(sSource, string.Format("NALogin - Topic: {0}", topic));
-            byte code = client.Connect(Guid.NewGuid().ToString());
-            EventLog.WriteEntry(sSource, string.Format("NALogin - MQTT client code: {0}", code));
-            client.Publish(topic, Encoding.UTF8.GetBytes(_hostName + "," + "Startup"));
+            try
+            {
+                byte code = client.Connect(Guid.NewGuid().ToString());
+                EventLog.WriteEntry(sSource, string.Format("NALogin - MQTT client code: {0}", code));
+                client.Publish(topic, Encoding.UTF8.GetBytes(_hostName + "," + "Startup"));
+            }
+            catch (Exception e)
+            {
+                EventLog.WriteEntry(sSource, string.Format("NALogin - Exception: {0}", e));
+                throw;
+            }
         }
 
         protected override void OnStop()
