@@ -1,6 +1,6 @@
-﻿namespace UserActivityService
+﻿namespace NinjaAntLoginService
 {
-    partial class Service1
+    partial class NALogin
     {
         /// <summary> 
         /// Required designer variable.
