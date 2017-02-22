@@ -40,6 +40,7 @@ namespace NinjaAntLoginService
             EventLog.WriteEntry(sSource, string.Format("NALogin - Topic: {0}", topic));
             try
             {
+                client.ProtocolVersion = MqttProtocolVersion.Version_3_1;
                 byte code = client.Connect(Guid.NewGuid().ToString());
                 EventLog.WriteEntry(sSource, string.Format("NALogin - MQTT client code: {0}", code));
                 client.Publish(topic, Encoding.UTF8.GetBytes(_hostName + "," + "Startup"));
