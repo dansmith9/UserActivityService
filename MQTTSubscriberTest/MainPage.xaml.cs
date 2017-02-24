@@ -18,31 +18,53 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI;
+using Windows.UI.Popups;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
-namespace MQTTSubscriberTest
+namespace SeatingPlanner
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private string MQTTServer = "";
+
         public MainPage()
         {
             this.InitializeComponent();
-            MqttClient client = new MqttClient("192.168.1.10");
-            client.Connect(Guid.NewGuid().ToString());
-            //client.Publish("/Logins/Test", Encoding.UTF8.GetBytes("UWP"));
 
-            ushort msgId = client.Subscribe(new string[] { "/Logins/221" },
-                new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
-            client.MqttMsgSubscribed += client_MqttMsgSubscribed;
-            //ByteCode.Text = msgId.ToString();
-            client.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            MQTTServer = e.Parameter as string;
+            try
+            {
+                MqttClient client = new MqttClient(MQTTServer);
+                client.Connect(Guid.NewGuid().ToString());
+                //client.Publish("/Logins/Test", Encoding.UTF8.GetBytes("UWP"));
+
+                ushort msgId = client.Subscribe(new string[] { "/Logins/221" },
+                    new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+                client.MqttMsgSubscribed += client_MqttMsgSubscribed;
+                //ByteCode.Text = msgId.ToString();
+                client.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
+            }
+            catch (Exception)
+            {
+                DisplayErrorDialog();
+            }
         }
 
 
+        private async void DisplayErrorDialog()
+        {
+            var messageDialog = new MessageDialog(string.Format("Could not connect to MQTT server {0}", MQTTServer));
+            messageDialog.Title = "Connection Error";
+            await messageDialog.ShowAsync();
+        }
 
         private async void client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
@@ -269,15 +291,15 @@ namespace MQTTSubscriberTest
             string ReturnText = "";
             if (SessionEvent== "SessionLogon")
             {
-                ReturnText = String.Format("{0}: {1}", ComputerNumber,UserName);
+                ReturnText = UserName;
             }
             else if (SessionEvent=="Logoff") //Required for future events?
             {
-                ReturnText = ComputerNumber;
+                ReturnText = "No user";
             }
             else
             {
-                ReturnText = ComputerNumber;
+                ReturnText = "No user";
             }
             return ReturnText;
         }

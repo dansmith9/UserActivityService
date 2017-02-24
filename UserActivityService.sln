@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQTTSubscriberTest", "MQTTSubscriberTest\MQTTSubscriberTest.csproj", "{8E639D5B-BA32-4F19-89C4-A669BBF10DDE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeatingPlanner", "MQTTSubscriberTest\SeatingPlanner.csproj", "{8E639D5B-BA32-4F19-89C4-A669BBF10DDE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjaAntLoginService", "NinjaAntLoginService\NinjaAntLoginService.csproj", "{F19D1136-AC98-4506-988E-A9D6D32462FB}"
 EndProject
