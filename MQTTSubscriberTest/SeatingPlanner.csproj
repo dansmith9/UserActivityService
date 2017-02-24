@@ -7,8 +7,8 @@
     <ProjectGuid>{8E639D5B-BA32-4F19-89C4-A669BBF10DDE}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MQTTSubscriberTest</RootNamespace>
-    <AssemblyName>MQTTSubscriberTest</AssemblyName>
+    <RootNamespace>SeatingPlanner</RootNamespace>
+    <AssemblyName>SeatingPlanner</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
