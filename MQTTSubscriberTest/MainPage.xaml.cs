@@ -43,6 +43,7 @@ namespace SeatingPlanner
             try
             {
                 MqttClient client = new MqttClient(MQTTServer);
+                client.ProtocolVersion = MqttProtocolVersion.Version_3_1;
                 client.Connect(Guid.NewGuid().ToString());
                 //client.Publish("/Logins/Test", Encoding.UTF8.GetBytes("UWP"));
 
